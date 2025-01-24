@@ -1,2 +1,2 @@
 # projetos_React
-Meus projetos em REact
+Meus projetos em React
