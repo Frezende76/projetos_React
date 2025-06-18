@@ -11,6 +11,7 @@ const Game = ({
   wrongLetters,
   guesses,
   score,
+  successMessage,
 }) => {
   const [letter, setLetter] = useState("");
   const letterInputRef = useRef(null);
@@ -35,6 +36,11 @@ const Game = ({
         Dica sobre a palavra: <span>{pickedCategory}</span>
       </h3>
       <p>Você ainda tem {guesses} tentativa(s).</p>
+
+       {successMessage && (
+        <p className="successMessage">{successMessage}</p> // NOVO
+      )}
+      
       <div className="wordContainer">
         {letters.map((letter, i) =>
           guessedLetters.includes(letter) ? (

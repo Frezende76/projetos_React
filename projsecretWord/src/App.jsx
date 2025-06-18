@@ -29,6 +29,7 @@ function App() {
   const [wrongLetters, setWrongLetters] = useState([]);
   const [guesses, setGuesses] = useState(3);
   const [score, setScore] = useState(0);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const pickWordAndCategory = useCallback(() => {
     // pick a random category
@@ -119,11 +120,13 @@ function App() {
 
     // win condition
     if (guessedLetters.length === uniqueLetters.length) {
-      // add score
-      setScore((actualScore) => (actualScore += 100));
+      setSuccessMessage("Parabéns! Você acertou a palavra!"); // NOVO
 
-      // restart game with new word
-      startGame();
+      setTimeout(() => {
+        setSuccessMessage("");
+        setScore((actualScore) => actualScore + 100);
+        startGame();
+      }, 2000);
     }
   }, [guessedLetters, letters, startGame]);
 
@@ -140,6 +143,7 @@ function App() {
           wrongLetters={wrongLetters}
           guesses={guesses}
           score={score}
+          successMessage={successMessage}
         />
       )}
       {gameStage === "end" && <GameOver retry={retry} score={score} />}
