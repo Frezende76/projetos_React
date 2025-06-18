@@ -31,6 +31,7 @@ function App() {
   const [guesses, setGuesses] = useState(3);//tentativas restantes
   const [score, setScore] = useState(0);//pontuação
   const [successMessage, setSuccessMessage] = useState("");//mensagem de sucesso
+  const [errorMessage, setErrorMessage] = useState("");
 
   //escolhe aleatoriamente uma categoria e uma palavra
   const pickWordAndCategory = useCallback(() => {
@@ -47,6 +48,9 @@ function App() {
 
   // start the game
   const startGame = useCallback(() => {
+    // reset attempts for new word
+    setGuesses(3);
+
     // clear all letters
     clearLettersStates();
 
@@ -60,6 +64,7 @@ function App() {
     setPickedCategory(category);
     setPickedWord(word);
     setLetters(wordLetters);
+    setErrorMessage("");
 
     setGameStage(stages[1].name);
   }, [pickWordAndCategory]);
@@ -81,8 +86,8 @@ function App() {
       setGuessedLetters((actualGuessedLetters) => [
         ...actualGuessedLetters,
         letter,
-        
       ]);
+      setErrorMessage(""); // Limpa mensagem de erro ao acertar
     } else {
       setWrongLetters((actualWrongLetters) => [
         ...actualWrongLetters,
@@ -90,6 +95,7 @@ function App() {
       ]);
 
       setGuesses((actualGuesses) => actualGuesses - 1);
+      setErrorMessage("Na palavra não tem essa letra.");
     }
   };
 
@@ -146,6 +152,7 @@ function App() {
           guesses={guesses}
           score={score}
           successMessage={successMessage}
+          errorMessage={errorMessage}
         />
       )}
       {gameStage === "end" && <GameOver retry={retry} score={score} />}

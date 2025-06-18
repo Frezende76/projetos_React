@@ -59,3 +59,13 @@
   border-radius: 5px;
 }
 
+.errorMessage {
+  color: red;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 10px 0;
+  padding: 10px 15px;
+  border: 2px solid red;
+  background-color: #ffe5e5;
+  border-radius: 5px;
+}

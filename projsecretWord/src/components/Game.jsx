@@ -12,6 +12,7 @@ const Game = ({
   guesses,           // tentativas restantes
   score,             // pontuação atual
   successMessage,    // mensagem de sucesso
+  errorMessage,      // mensagem de erro
 }) => {
   const [letter, setLetter] = useState(""); // controla a letra digitada
   const letterInputRef = useRef(null); // Mantém o foco no input
@@ -35,7 +36,12 @@ const Game = ({
       <h3 className="tip">
         Dica sobre a palavra: <span>{pickedCategory}</span>
       </h3>
-      <p>Você ainda tem {guesses} tentativa(s).</p>
+
+       {errorMessage && (
+        <p className="errorMessage">{errorMessage}</p> // NOVO
+      )}
+
+      <p>Você tem {guesses} tentativa(s).</p>
 
        {successMessage && (
         <p className="successMessage">{successMessage}</p> // NOVO
