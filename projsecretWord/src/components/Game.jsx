@@ -4,26 +4,26 @@ import { useState, useRef } from "react";
 import "./Game.css";
 
 const Game = ({
-  verifyLetter,
-  pickedCategory,
-  letters,
-  guessedLetters,
-  wrongLetters,
-  guesses,
-  score,
-  successMessage,
+  verifyLetter,      // função para verificar se a letra está correta
+  pickedCategory,    // dica: categoria da palavra
+  letters,           // Letras da palavra sorteada
+  guessedLetters,    // Letras acertadas
+  wrongLetters,      // Letras erradas
+  guesses,           // tentativas restantes
+  score,             // pontuação atual
+  successMessage,    // mensagem de sucesso
 }) => {
-  const [letter, setLetter] = useState("");
-  const letterInputRef = useRef(null);
+  const [letter, setLetter] = useState(""); // controla a letra digitada
+  const letterInputRef = useRef(null); // Mantém o foco no input
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();  // evita recarregar a página
 
-    verifyLetter(letter);
+    verifyLetter(letter);  // verifica a letra digitada
 
-    setLetter("");
+    setLetter(""); // limpa o campo
 
-    letterInputRef.current.focus();
+    letterInputRef.current.focus(); // volta o foco para o input
   };
 
   return (
@@ -40,7 +40,7 @@ const Game = ({
        {successMessage && (
         <p className="successMessage">{successMessage}</p> // NOVO
       )}
-      
+
       <div className="wordContainer">
         {letters.map((letter, i) =>
           guessedLetters.includes(letter) ? (
@@ -53,7 +53,7 @@ const Game = ({
         )}
       </div>
       <div className="letterContainer">
-        <p>Tente adivnhar uma letra da palavra:</p>
+        <p>Tente adivinhar uma letra da palavra:</p>
         <form onSubmit={handleSubmit}>
           <input
             type="text"

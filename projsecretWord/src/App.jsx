@@ -11,6 +11,7 @@ import "./App.css";
 // data
 import { wordsList } from "./data/words";
 
+//define as três etapas(telas) do jogo
 const stages = [
   { id: 1, name: "start" },
   { id: 2, name: "game" },
@@ -18,19 +19,20 @@ const stages = [
 ];
 
 function App() {
-  const [gameStage, setGameStage] = useState(stages[0].name);
-  const [words] = useState(wordsList);
+  const [gameStage, setGameStage] = useState(stages[0].name);//etapa atual
+  const [words] = useState(wordsList);//Lista de palavras 
 
-  const [pickedWord, setPickedWord] = useState("");
-  const [pickedCategory, setPickedCategory] = useState("");
-  const [letters, setLetters] = useState([]);
+  const [pickedWord, setPickedWord] = useState("");//palavra sorteada
+  const [pickedCategory, setPickedCategory] = useState("");//categoria da palavra
+  const [letters, setLetters] = useState([]);//letras da palavra
   
-  const [guessedLetters, setGuessedLetters] = useState([]);
-  const [wrongLetters, setWrongLetters] = useState([]);
-  const [guesses, setGuesses] = useState(3);
-  const [score, setScore] = useState(0);
-  const [successMessage, setSuccessMessage] = useState("");
+  const [guessedLetters, setGuessedLetters] = useState([]);//letras acertadas
+  const [wrongLetters, setWrongLetters] = useState([]);//letras erradas
+  const [guesses, setGuesses] = useState(3);//tentativas restantes
+  const [score, setScore] = useState(0);//pontuação
+  const [successMessage, setSuccessMessage] = useState("");//mensagem de sucesso
 
+  //escolhe aleatoriamente uma categoria e uma palavra
   const pickWordAndCategory = useCallback(() => {
     // pick a random category
     const categories = Object.keys(words);
